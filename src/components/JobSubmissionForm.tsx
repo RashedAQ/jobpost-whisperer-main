@@ -23,14 +23,13 @@ const JobSubmissionForm = ({}: JobSubmissionFormProps) => {
     setError("");
     
     try {
-      const response = await fetch("https://rashedbnq.app.n8n.cloud/webhook-test/36fcf7f4-58aa-431e-8c15-fe0eeb80c6b6", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          jobText: jobText
-        }),
+      // For GET webhook, send data as URL parameters
+      const params = new URLSearchParams({
+        jobText: jobText
+      });
+      
+      const response = await fetch(`https://rashedbnq.app.n8n.cloud/webhook-test/36fcf7f4-58aa-431e-8c15-fe0eeb80c6b6?${params}`, {
+        method: "GET",
       });
 
       if (!response.ok) {
